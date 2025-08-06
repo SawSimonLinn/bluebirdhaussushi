@@ -6,13 +6,25 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
 import Link from "next/link";
-import { Utensils, Fish, GlassWater } from "lucide-react";
+import { Utensils, Fish, ChefHat, Star } from "lucide-react";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
 } from "@/components/ui/carousel";
+
 import Autoplay from "embla-carousel-autoplay";
+
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
 
 const heroImages = [
   {
@@ -30,6 +42,78 @@ const heroImages = [
   {
     src: "/images/hero4.jpg",
     alt: "Chef preparing sushi",
+  },
+];
+
+const reviews = [
+  {
+    name: "Alex Johnson",
+    avatar:
+      "https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fwww.gravatar.com%2Favatar%2F2c7d99fe281ecd3bcd65ab915bac6dd5%3Fs%3D250",
+    rating: 5,
+    review:
+      "Absolutely phenomenal! The vegan sushi options are creative and delicious. The ambiance is perfect for a special night out. Can't wait to come back!",
+    data_ai_hint: "happy customer",
+  },
+  {
+    name: "Samantha Lee",
+    avatar:
+      "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=922&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    rating: 5,
+    review:
+      "Blue Bird Haus exceeded all expectations. The Dragon Roll was a work of art, and the service was impeccable. A must-visit for any sushi lover.",
+    data_ai_hint: "pleased diner",
+  },
+  {
+    name: "Michael Chen",
+    avatar:
+      "https://harvardtechnologyreview.com/wp-content/uploads/2023/10/image.jpeg",
+    rating: 4,
+    review:
+      "A wonderful dining experience. The ramen was authentic and flavorful, and the staff was very accommodating of our dietary needs. Highly recommended.",
+    data_ai_hint: "person eating",
+  },
+  {
+    name: "Jessica Davis",
+    avatar:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSv_rkox4AOiwfzaLsYaEtftpv4xfl-lSAGxg&s",
+    rating: 5,
+    review:
+      "The attention to detail in every dish is astounding. A true gem for anyone who appreciates high-quality, plant-based cuisine. The cocktails are also top-notch!",
+    data_ai_hint: "food blogger",
+  },
+  {
+    name: "David Wilson",
+    avatar:
+      "https://www.macfound.org/media/fellows/profile_photos/wilson_2001_profile-240.png",
+    rating: 5,
+    review:
+      "Came here for an anniversary dinner and it was perfect. The atmosphere is romantic and the food is simply divine. We'll definitely be celebrating here again.",
+    data_ai_hint: "happy couple",
+  },
+];
+
+const faqs = [
+  {
+    question: "Is parking available?",
+    answer:
+      "Yes, we understand that parking in Los Angeles can be challenging. We have a dedicated parking lot for our guests, as well as street parking available nearby.",
+  },
+  {
+    question: "Are all your menu items 100% vegan?",
+    answer:
+      "Yes, absolutely! We are proud to offer a completely plant-based menu. Everything from our sushi to our ramen and desserts is 100% vegan.",
+  },
+
+  {
+    question: "Do you offer catering for private events?",
+    answer:
+      "Yes, we offer comprehensive catering services and options for private events. Please visit our 'Events / Catering' section or contact us directly for more details.",
+  },
+  {
+    question: "Do you have options for people with nut allergies?",
+    answer:
+      "We are very careful about allergens. While some of our dishes contain nuts, we take precautions to prevent cross-contamination. Please speak with your server for recommendations.",
   },
 ];
 
@@ -111,22 +195,24 @@ export default function Home() {
                   </p>
                 </CardContent>
               </Card>
+
               <Card className="text-center hover:shadow-xl transition-shadow duration-300">
                 <CardHeader>
                   <div className="mx-auto bg-primary text-primary-foreground rounded-full p-4 w-fit">
-                    <GlassWater className="w-8 h-8" />
+                    <ChefHat className="w-8 h-8" />
                   </div>
                   <CardTitle className="font-headline mt-4">
-                    Craft Cocktails
+                    Fresh Ingredients
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p>
-                    A curated selection of cocktails and sake designed to
-                    perfectly complement your meal.
+                    Every dish is prepared with carefully selected ingredients
+                    for unmatched flavor and freshness.
                   </p>
                 </CardContent>
               </Card>
+
               <Card className="text-center hover:shadow-xl transition-shadow duration-300">
                 <CardHeader>
                   <div className="mx-auto bg-primary text-primary-foreground rounded-full p-4 w-fit">
@@ -180,6 +266,145 @@ export default function Home() {
                 data-ai-hint="sushi chef"
               />
             </div>
+          </div>
+        </section>
+
+        <section className="py-16 md:py-24 bg-background">
+          <div className="container mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
+            <div className="relative h-80 md:h-96 rounded-lg overflow-hidden shadow-lg order-2 md:order-1">
+              <Image
+                src="https://images.squarespace-cdn.com/content/v1/646aee611bef74384609e65e/01a1c8d7-df9c-49e6-90c2-646207da5a60/IMG_8396.jpg"
+                alt="A beautiful catering setup for a private event"
+                layout="fill"
+                objectFit="cover"
+                data-ai-hint="event catering"
+              />
+            </div>
+            <div className="order-1 md:order-2">
+              <h2 className="text-3xl md:text-4xl font-headline mb-4">
+                Events & Catering
+              </h2>
+              <p className="mb-4 text-muted-foreground">
+                Elevate your special occasions with the exquisite flavors of
+                Blue Bird Haus. We offer private dining options and full-service
+                catering for events of all sizes. From corporate gatherings to
+                intimate celebrations, our team will work with you to create a
+                memorable culinary experience.
+              </p>
+              <p className="mb-6 text-muted-foreground">
+                Choose from our curated party trays or customize a menu that
+                perfectly suits your event.
+              </p>
+              <Button asChild>
+                <Link href="/contact">Inquire Now</Link>
+              </Button>
+            </div>
+          </div>
+        </section>
+
+        <Separator />
+
+        <section className="py-16 md:py-24 bg-secondary/50">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-headline">
+                What Our Guests Are Saying
+              </h2>
+              <div className="flex justify-center items-center gap-2 mt-4">
+                <svg
+                  className="w-6 h-6 text-blue-500"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path d="M21.8,10.2C21.8,9.7,21.7,9.1,21.6,8.6H11.1V12H17C16.8,13.2,16.1,14.3,15.2,15V17.5H18C19.9,15.7,21.3,13.2,21.8,10.2Z"></path>
+                  <path d="M11.1,22C14.3,22,17,20.8,19.1,18.8L15.2,15.9C14.2,16.6,12.8,17.1,11.1,17.1C8.2,17.1,5.8,15.2,4.9,12.6H1.4V15.2C3.3,19.2,6.9,22,11.1,22Z"></path>
+                  <path d="M4.9,11.4C4.7,10.8,4.6,10.2,4.6,9.5C4.6,8.8,4.7,8.2,4.9,7.6V5H1.4C0.5,6.8,0,8.1,0,9.5C0,10.9,0.5,12.2,1.4,14L4.9,11.4Z"></path>
+                  <path d="M11.1,4.4C12.9,4.4,14.4,5,15.1,5.7L18.1,2.8C16.2,1.1,13.8,0,11.1,0C6.9,0,3.3,2.8,1.4,6.8L4.9,9.4C5.8,6.8,8.2,4.9,11.1,4.9V4.4Z"></path>
+                </svg>
+                <Badge variant="outline">Google Reviews</Badge>
+              </div>
+            </div>
+
+            <Carousel
+              opts={{
+                align: "start",
+                loop: true,
+              }}
+              className="w-full"
+            >
+              <CarouselContent className="-ml-4">
+                {reviews.map((review, index) => (
+                  <CarouselItem
+                    key={index}
+                    className="pl-4 md:basis-1/2 lg:basis-1/3"
+                  >
+                    <div className="p-1 h-full">
+                      <Card className="flex flex-col h-full">
+                        <CardHeader className="flex flex-row items-center gap-4">
+                          <Avatar className="h-12 w-12">
+                            <AvatarImage
+                              src={review.avatar}
+                              alt={review.name}
+                              data-ai-hint={review.data_ai_hint}
+                              className="object-cover"
+                            />
+                            <AvatarFallback>
+                              {review.name.charAt(0)}
+                            </AvatarFallback>
+                          </Avatar>
+                          <div>
+                            <CardTitle className="text-lg">
+                              {review.name}
+                            </CardTitle>
+                            <div className="flex text-primary">
+                              {[...Array(review.rating)].map((_, i) => (
+                                <Star
+                                  key={i}
+                                  className="w-5 h-5 fill-current"
+                                />
+                              ))}
+                              {[...Array(5 - review.rating)].map((_, i) => (
+                                <Star key={i} className="w-5 h-5" />
+                              ))}
+                            </div>
+                          </div>
+                        </CardHeader>
+                        <CardContent className="flex-grow">
+                          <p className="text-muted-foreground">
+                            "{review.review}"
+                          </p>
+                        </CardContent>
+                      </Card>
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious className="ml-10" />
+              <CarouselNext className="mr-10" />
+            </Carousel>
+          </div>
+        </section>
+
+        <Separator />
+
+        <section className="py-16 md:py-24 bg-background">
+          <div className="container mx-auto px-4 max-w-4xl">
+            <h2 className="text-3xl md:text-4xl font-headline text-center mb-12">
+              Frequently Asked Questions
+            </h2>
+            <Accordion type="single" collapsible className="w-full">
+              {faqs.map((faq, index) => (
+                <AccordionItem value={`item-${index}`} key={index}>
+                  <AccordionTrigger className="text-lg text-left">
+                    {faq.question}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-base text-muted-foreground">
+                    {faq.answer}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
           </div>
         </section>
       </main>
