@@ -724,7 +724,7 @@ export default function MenuPage() {
           </TabsTrigger>
           <TabsTrigger value="delightfulRolls" className="py-2.5">
             <IceCream className="w-4 h-4 mr-2" />
-            Delightful Rolls (Fully Cooked)
+            Delightful Rolls (Cooked)
           </TabsTrigger>
           <TabsTrigger value="delightfulRollsRaw" className="py-2.5">
             <IceCream className="w-4 h-4 mr-2" />
