@@ -14,29 +14,6 @@ import {
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 
-// const heroImages = [
-//   {
-//     src: "/images/hero1.jpg",
-//     alt: "Hero background image of a modern sushi restaurant interior",
-//     data_ai_hint: "restaurant interior",
-//   },
-//   {
-//     src: "/images/hero2.jpg",
-//     alt: "A close-up of a beautifully presented sushi platter",
-//     data_ai_hint: "sushi platter",
-//   },
-//   {
-//     src: "/images/hero3.jpg",
-//     alt: "Guests dining in a sophisticated and ambient restaurant",
-//     data_ai_hint: "fine dining",
-//   },
-//   {
-//     src: "/images/hero4.jpg",
-//     alt: "A chef carefully preparing a sushi roll",
-//     data_ai_hint: "sushi chef",
-//   },
-// ];
-
 const heroImages = [
   {
     src: "/images/hero1.jpg",
@@ -63,42 +40,14 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
       <main className="flex-1">
-        <section className="relative h-[60vh] md:h-[80vh] flex items-center justify-center text-center text-white">
-          {/* <Carousel
-            className="absolute inset-0 w-full h-full"
-            plugins={[
-              Autoplay({
-                delay: 5000,
-                stopOnInteraction: false,
-                stopOnMouseEnter: true,
-              }),
-            ]}
-            opts={{ loop: true }}
-          >
-            <CarouselContent className="w-full h-full">
-              {heroImages.map((image, index) => (
-                <CarouselItem key={index} className="relative w-full h-full">
-                  <Image
-                    src={image.src}
-                    alt={image.alt}
-                    fill
-                    style={{ objectFit: "cover" }}
-                    className="z-0"
-                    data-ai-hint={image.data_ai_hint}
-                    priority={index === 0}
-                  />
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-          </Carousel> */}
-
-          <div className="absolute inset-0 bg-black/50 z-10" />
+        <section className="relative h-[60vh] md:h-[80vh] flex items-center justify-center text-center text-white overflow-hidden">
+          {/* 🔁 Background Carousel */}
           <div className="embla absolute inset-0 z-0" ref={emblaRef}>
             <div className="embla__container flex h-full">
               {heroImages.map((image, index) => (
                 <div
                   key={index}
-                  className="embla__slide relative min-w-full h-full aspect-square"
+                  className="embla__slide relative min-w-full h-full"
                 >
                   <Image
                     src={image.src}
@@ -113,7 +62,10 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="absolute inset-0 bg-black/50 z-10" />
+          {/* 🔲 Overlay */}
+          <div className="absolute inset-0 bg-black/65 z-10" />
+
+          {/* 💬 Content */}
           <div className="z-20 relative px-4">
             <h1 className="font-headline text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight">
               Blue Bird Haus
