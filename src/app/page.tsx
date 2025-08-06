@@ -98,7 +98,7 @@ export default function Home() {
               {heroImages.map((image, index) => (
                 <div
                   key={index}
-                  className="embla__slide relative min-w-full h-full"
+                  className="embla__slide relative min-w-full h-full aspect-square"
                 >
                   <Image
                     src={image.src}
@@ -106,6 +106,7 @@ export default function Home() {
                     fill
                     priority={index === 0}
                     style={{ objectFit: "cover" }}
+                    sizes="100vw"
                   />
                 </div>
               ))}
