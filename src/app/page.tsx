@@ -7,6 +7,8 @@ import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
 import Link from "next/link";
 import { Utensils, Fish, ChefHat, Star } from "lucide-react";
+import { FaGoogle } from "react-icons/fa";
+
 import {
   Carousel,
   CarouselContent,
@@ -311,17 +313,7 @@ export default function Home() {
                 What Our Guests Are Saying
               </h2>
               <div className="flex justify-center items-center gap-2 mt-4">
-                <svg
-                  className="w-6 h-6 text-blue-500"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                >
-                  <path d="M21.8,10.2C21.8,9.7,21.7,9.1,21.6,8.6H11.1V12H17C16.8,13.2,16.1,14.3,15.2,15V17.5H18C19.9,15.7,21.3,13.2,21.8,10.2Z"></path>
-                  <path d="M11.1,22C14.3,22,17,20.8,19.1,18.8L15.2,15.9C14.2,16.6,12.8,17.1,11.1,17.1C8.2,17.1,5.8,15.2,4.9,12.6H1.4V15.2C3.3,19.2,6.9,22,11.1,22Z"></path>
-                  <path d="M4.9,11.4C4.7,10.8,4.6,10.2,4.6,9.5C4.6,8.8,4.7,8.2,4.9,7.6V5H1.4C0.5,6.8,0,8.1,0,9.5C0,10.9,0.5,12.2,1.4,14L4.9,11.4Z"></path>
-                  <path d="M11.1,4.4C12.9,4.4,14.4,5,15.1,5.7L18.1,2.8C16.2,1.1,13.8,0,11.1,0C6.9,0,3.3,2.8,1.4,6.8L4.9,9.4C5.8,6.8,8.2,4.9,11.1,4.9V4.4Z"></path>
-                </svg>
+                <FaGoogle className="w-6 h-6 text-blue-500" />
                 <Badge variant="outline">Google Reviews</Badge>
               </div>
             </div>
@@ -357,7 +349,7 @@ export default function Home() {
                             <CardTitle className="text-lg">
                               {review.name}
                             </CardTitle>
-                            <div className="flex text-primary">
+                            <div className="flex text-yellow-500">
                               {[...Array(review.rating)].map((_, i) => (
                                 <Star
                                   key={i}

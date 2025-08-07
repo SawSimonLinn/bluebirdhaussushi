@@ -6,7 +6,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
-  title: "Blue Bird Haus",
+  title: "Blue Bird Haus Sushi",
   description: "Exquisite sushi and an unforgettable dining experience.",
 };
 
@@ -33,11 +33,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body
-        className={cn(
-          "min-h-screen bg-background font-body antialiased"
-        )}
-      >
+      <body className={cn("min-h-screen bg-background font-body antialiased")}>
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />

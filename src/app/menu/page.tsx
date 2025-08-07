@@ -18,6 +18,7 @@ import {
   Fish,
 } from "lucide-react";
 import Image from "next/image";
+import { Badge } from "@/components/ui/badge";
 
 const menu = {
   appetizers: [
@@ -628,6 +629,7 @@ const menu = {
       description:
         "Sushi Rice, Spicy Tofu, Avocado, Cucumber, Seaweed Salad, Sesame Seeds",
       price: "16.00",
+      note: "Recommended",
       data_ai_hint: "spicy tofu bowl",
     },
     {
@@ -635,6 +637,7 @@ const menu = {
       description:
         "Sushi Rice, Vegan Tuna, Cucumber, Avocado, Seaweed Salad, Poke Sauce",
       price: "18.00",
+      note: "Takes extra time",
       data_ai_hint: "tuna spicy poke bowl",
     },
     {
@@ -642,6 +645,7 @@ const menu = {
       description:
         "Sushi Rice, Vegan Salmon, Cucumber, Avocado, Seaweed Salad, Poke Sauce",
       price: "18.00",
+      note: "Takes extra time",
       data_ai_hint: "salmon spicy poke bowl",
     },
   ],
@@ -653,12 +657,14 @@ function MenuItem({
   price,
   src,
   data_ai_hint,
+  note,
 }: {
   name: string;
   description: string;
   price: string;
   src?: string;
   data_ai_hint: string;
+  note?: string;
 }) {
   return (
     <Card className="hover:shadow-md transition-shadow overflow-hidden flex flex-col justify-between">
@@ -684,6 +690,15 @@ function MenuItem({
           </div>
         </div>
       </CardHeader>
+      <CardContent>
+        {note && (
+          <Badge
+            variant={note.includes("Recommended") ? "default" : "secondary"}
+          >
+            {note}
+          </Badge>
+        )}
+      </CardContent>
     </Card>
   );
 }

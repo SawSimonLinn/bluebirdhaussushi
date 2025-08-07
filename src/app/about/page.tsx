@@ -35,7 +35,7 @@ export default function AboutPage() {
           <div className="md:col-span-2 mt-8 md:mt-0">
             <div className="relative h-96 rounded-lg overflow-hidden shadow-xl">
               <Image
-                src="https://s3-media0.fl.yelpcdn.com/bphoto/Cvfk_ZQrYCc6L7C8iqWYlg/o.jpg"
+                src="https://s3-media0.fl.yelpcdn.com/bphoto/VHUxIcz6NDxt4mzzdhXhgg/o.jpg"
                 alt="A serene corner of the Blue Bird Haus restaurant"
                 layout="fill"
                 objectFit="cover"

@@ -1,5 +1,6 @@
 "use client";
 
+import { Client, Databases, ID, Query } from "appwrite"; // add to top of file
 import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -15,7 +16,13 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { DatePicker } from "@/components/ui/date-picker";
 import { Card, CardContent } from "@/components/ui/card";
@@ -25,9 +32,10 @@ const formSchema = z.object({
   name: z.string().min(2, {
     message: "Name must be at least 2 characters.",
   }),
-  contact: z.string().min(5, {
-    message: "Please enter a valid phone number or email.",
+  contact: z.string().email({
+    message: "Please enter a valid email address.",
   }),
+
   date: z.date({
     required_error: "A date is required.",
   }),
@@ -52,9 +60,72 @@ export function ReservationForm() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-    setIsSubmitted(true);
+  // Setup Appwrite client
+  const client = new Client()
+    .setEndpoint(
+      process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT ||
+        "https://nyc.cloud.appwrite.io/v1"
+    )
+    .setProject(
+      process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID || "YOUR_PROJECT_ID"
+    );
+
+  const databases = new Databases(client);
+  const DATABASE_ID =
+    process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID || "YOUR_DATABASE_ID";
+  const COLLECTION_ID =
+    process.env.NEXT_PUBLIC_APPWRITE_COLLECTION_ID || "YOUR_COLLECTION_ID";
+
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    try {
+      // Check if same date/time already exists
+      const existing = await databases.listDocuments(
+        DATABASE_ID,
+        COLLECTION_ID,
+        [
+          Query.equal("date", values.date.toISOString().split("T")[0]),
+          Query.equal("time", values.time),
+        ]
+      );
+
+      if (existing.total > 0) {
+        alert("This time is already booked. Please choose another.");
+        return;
+      }
+
+      const cancelToken = ID.unique(); // unique cancel ID
+
+      // Create new reservation
+      await databases.createDocument(DATABASE_ID, COLLECTION_ID, cancelToken, {
+        name: values.name,
+        contact: values.contact,
+        date: values.date.toISOString().split("T")[0],
+        time: values.time,
+        guests: parseInt(values.guests), // ✅ Fix here
+        notes: values.notes || "",
+        cancelToken,
+        cancelExpires: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(), // 24 hours from now
+      });
+
+      // Send email & Email notifications
+      await fetch("/api/send-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...values,
+          date: values.date.toISOString().split("T")[0],
+          bookingId: Math.random().toString(36).substring(2, 10).toUpperCase(),
+          cancelToken,
+        }),
+      });
+
+      setIsSubmitted(true);
+    } catch (error) {
+      console.error("Submission error", error);
+      alert("Something went wrong. Please try again.");
+    }
   }
 
   if (isSubmitted) {
@@ -62,10 +133,13 @@ export function ReservationForm() {
       <Card className="text-center p-8">
         <CardContent>
           <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
-          <h2 className="text-2xl font-headline mb-2">Reservation Confirmed!</h2>
+          <h2 className="text-2xl font-headline mb-2">
+            Reservation Confirmed!
+          </h2>
           <p className="text-muted-foreground">
-            Thank you for your reservation. We look forward to welcoming you at Blue Bird Haus.
-            A confirmation has been sent to your contact details.
+            Thank you for your reservation. We look forward to welcoming you at
+            Blue Bird Haus. A confirmation has been sent to your contact
+            details.
           </p>
           <Button onClick={() => setIsSubmitted(false)} className="mt-6">
             Make Another Reservation
@@ -98,7 +172,7 @@ export function ReservationForm() {
               name="contact"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Contact (Phone or Email)</FormLabel>
+                  <FormLabel>Email</FormLabel>
                   <FormControl>
                     <Input placeholder="johndoe@example.com" {...field} />
                   </FormControl>
@@ -114,7 +188,7 @@ export function ReservationForm() {
                   <FormItem className="flex flex-col">
                     <FormLabel>Date</FormLabel>
                     <DatePicker field={field} />
-                    <FormMessage className="pt-1"/>
+                    <FormMessage className="pt-1" />
                   </FormItem>
                 )}
               />
@@ -124,7 +198,10 @@ export function ReservationForm() {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Time</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
                       <FormControl>
                         <SelectTrigger>
                           <SelectValue placeholder="Select a time" />
@@ -149,20 +226,23 @@ export function ReservationForm() {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Number of Guests</FormLabel>
-                   <Select onValueChange={field.onChange} defaultValue={field.value}>
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select number of guests" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        {[...Array(8)].map((_, i) => (
-                          <SelectItem key={i + 1} value={`${i + 1}`}>
-                            {i + 1} guest{i > 0 ? 's' : ''}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select number of guests" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {[...Array(8)].map((_, i) => (
+                        <SelectItem key={i + 1} value={`${i + 1}`}>
+                          {i + 1} guest{i > 0 ? "s" : ""}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                   <FormMessage />
                 </FormItem>
               )}
@@ -187,7 +267,9 @@ export function ReservationForm() {
                 </FormItem>
               )}
             />
-            <Button type="submit" className="w-full">Confirm Reservation</Button>
+            <Button type="submit" className="w-full">
+              Confirm Reservation
+            </Button>
           </form>
         </Form>
       </CardContent>
