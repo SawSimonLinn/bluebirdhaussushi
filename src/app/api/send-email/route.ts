@@ -66,7 +66,6 @@ export async function POST(req: Request) {
     <p>📍 <strong>Location:</strong>${address}</p>
     <p>📞 <strong>Phone:</strong><a href="${cancelLink}">${phone}</a></p>
     <p>⏰ <strong>Hours:</strong> ${hours}</p>
-    <p>If you need to cancel your reservation, please click below:</p>
     <p>If you need to cancel, please <a href="${cancelUrl}">click here to cancel your booking</a>.</p>
 
 <hr />

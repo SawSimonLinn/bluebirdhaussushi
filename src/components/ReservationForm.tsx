@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
+
 import {
   Form,
   FormControl,
@@ -186,7 +187,7 @@ export function ReservationForm() {
                 name="date"
                 render={({ field }) => (
                   <FormItem className="flex flex-col">
-                    <FormLabel>Date</FormLabel>
+                    <FormLabel className="pt-2.5">Date</FormLabel>
                     <DatePicker field={field} />
                     <FormMessage className="pt-1" />
                   </FormItem>
@@ -208,6 +209,11 @@ export function ReservationForm() {
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
+                        <SelectItem value="12:00">12:00 PM</SelectItem>
+                        <SelectItem value="13:00">1:00 PM</SelectItem>
+                        <SelectItem value="14:00">2:00 PM</SelectItem>
+                        <SelectItem value="15:00">3:00 PM</SelectItem>
+                        <SelectItem value="16:00">4:00 PM</SelectItem>
                         <SelectItem value="17:00">5:00 PM</SelectItem>
                         <SelectItem value="18:00">6:00 PM</SelectItem>
                         <SelectItem value="19:00">7:00 PM</SelectItem>
