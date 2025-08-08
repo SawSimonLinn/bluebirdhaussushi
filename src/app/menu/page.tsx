@@ -69,7 +69,9 @@ function MenuItem({
             </Badge>
           )}
           {isVegan ? (
-            <Badge variant="outline">Vegan</Badge>
+            <Badge variant="outline" className="bg-green-600 text-white">
+              Vegan
+            </Badge>
           ) : (
             isCooked !== undefined && (
               <Badge variant={isCooked ? "secondary" : "destructive"}>
@@ -90,10 +92,23 @@ export default function MenuPage() {
   const filteredMenu = (items: MenuItemType[]) => {
     return items.filter((item) => {
       const veganMatch = !showVeganOnly || item.isVegan;
-      const dietaryMatch =
-        dietaryFilter === "all" ||
-        (dietaryFilter === "cooked" && item.isCooked) ||
-        (dietaryFilter === "raw" && !item.isCooked);
+
+      let dietaryMatch = true;
+      if (dietaryFilter !== "all") {
+        if (item.isVegan) {
+          // For vegan items, 'cooked' should match if isCooked is true. 'raw' should not match unless explicitly defined.
+          dietaryMatch =
+            dietaryFilter === "cooked"
+              ? item.isCooked === true
+              : item.isCooked === false;
+        } else {
+          // For non-vegan items, the logic remains as before.
+          dietaryMatch =
+            (dietaryFilter === "cooked" && item.isCooked) ||
+            (dietaryFilter === "raw" && !item.isCooked);
+        }
+      }
+
       return veganMatch && dietaryMatch;
     });
   };
@@ -158,6 +173,10 @@ export default function MenuPage() {
             <IceCream className="w-4 h-4 mr-2" />
             Delightful Rolls
           </TabsTrigger>
+          <TabsTrigger value="sashimi" className="py-2.5">
+            <IceCream className="w-4 h-4 mr-2" />
+            Sashimi (8 Pcs)
+          </TabsTrigger>
           <TabsTrigger value="nigiri" className="py-2.5">
             <Fish className="w-4 h-4 mr-2" />
             Nigiri (2 Pcs)
@@ -199,6 +218,14 @@ export default function MenuPage() {
         <TabsContent value="delightfulRolls" className="mt-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
             {filteredMenu(menu.delightfulRolls).map((item) => (
+              <MenuItem key={item.name} {...item} />
+            ))}
+          </div>
+        </TabsContent>
+
+        <TabsContent value="sashimi" className="mt-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            {filteredMenu(menu.sashimi).map((item) => (
               <MenuItem key={item.name} {...item} />
             ))}
           </div>

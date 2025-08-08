@@ -12,6 +12,7 @@ export const menu = {
   appetizers: [
     {
       isVegan: true,
+      isCooked: true,
       name: "Vegan Edamame",
       description: "Steamed edamame pods sprinkled with sea salt.",
       price: "6.50",
@@ -20,6 +21,7 @@ export const menu = {
     },
     {
       isVegan: true,
+      isCooked: true,
       name: " Fried Veggie Gyoza",
       description: "Crispy vegetable dumplings served with soy sauce. (6 pcs)",
       price: "8.00",
@@ -28,6 +30,7 @@ export const menu = {
     },
     {
       isVegan: true,
+      isCooked: true,
       name: " Fried Veggie Spring Rolls ",
       description: "Crispy spring rolls filled with mixed vegetables. (5 pcs)",
       price: "8.00",
@@ -36,6 +39,7 @@ export const menu = {
     },
     {
       isVegan: true,
+      isCooked: true,
       name: " Vegetable Tempura",
       description: "Crispy battered vegetables served with dipping sauce.",
       price: "10.00",
@@ -43,6 +47,7 @@ export const menu = {
       data_ai_hint: "vegetable tempura",
     },
     {
+      isCooked: false,
       name: "Dragon Ball (2 Pcs)",
       description: "Sushi rice ball with salmon",
       price: "10.00",
@@ -51,6 +56,7 @@ export const menu = {
     },
     {
       isVegan: true,
+      isCooked: true,
       name: " Drumstick (4 pcs)",
       description: "Crispy vegan drumsticks with a savory glaze.",
       price: "10.00",
@@ -63,18 +69,21 @@ export const menu = {
       data_ai_hint: "crispy rice spicy tuna",
     },
     {
+      isCooked: true,
       name: "Spicy Garlic Edamame",
       description: "Steamed edamame pods tossed in a spicy garlic sauce.",
       price: "7.00",
       data_ai_hint: "spicy garlic edamame",
     },
     {
+      isCooked: true,
       name: "Fried Pork Gyoza",
       description: "Crispy fried dumplings filled with seasoned pork. (6 pcs)",
       price: "8.00",
       data_ai_hint: "fried pork gyoza",
     },
     {
+      isCooked: true,
       name: "Fried Tofu (8 pcs)",
       description:
         "Crispy fried tofu served with a sweet and spicy dipping sauce.",
@@ -82,6 +91,7 @@ export const menu = {
       data_ai_hint: "fried tofu",
     },
     {
+      isCooked: true,
       name: "Shrimp Tempura (5 pcs)",
       description: "Crispy battered shrimp served with dipping sauce.",
       price: "10.00",
@@ -89,6 +99,7 @@ export const menu = {
     },
     {
       isVegan: true,
+      isCooked: true,
       name: " Crispy Rice Mashed Avocado",
       description: "Crispy rice topped with mashed avocado and spicy mayo.",
       price: "10.00",
@@ -96,12 +107,14 @@ export const menu = {
     },
     {
       isVegan: true,
+      isCooked: true,
       name: " Dynamite Cauliflower",
       description: "Crispy cauliflower bites tossed in a spicy mayo sauce.",
       price: "10.00",
       data_ai_hint: "dynamite cauliflower",
     },
     {
+      isCooked: true,
       name: "Mixed Tempura (Shrimp & Vegetable)",
       description: "An assortment of crispy battered shrimp and vegetables.",
       price: "12.00",
@@ -111,14 +124,15 @@ export const menu = {
   salads: [
     {
       isVegan: true,
+      isCooked: true,
       name: " Cucumber Salad",
       description: "Refreshing cucumber salad with sesame dressing.",
-      src: "https://placehold.co/400x400.png",
       price: "6.00",
       data_ai_hint: "cucumber salad",
     },
     {
       isVegan: true,
+      isCooked: true,
       name: " Seaweed Salad",
       description: "Chilled seaweed salad with rice vinegar.",
       price: "6.00",
@@ -127,6 +141,7 @@ export const menu = {
     },
     {
       isVegan: true,
+      isCooked: true,
       name: " House Salad",
       description: "Chilled house salad with rice vinegar.",
       price: "8.00",
@@ -134,10 +149,10 @@ export const menu = {
       data_ai_hint: "house salad",
     },
     {
+      isCooked: false,
       name: "BlueBird Poke Salad",
       description:
         "Diced Salmon, Tuna, Yellowtail, Avocado, Cucumber, Seaweed Salad, Spring Mix,Poke Sauce",
-      src: "https://placehold.co/400x400.png",
       price: "18.00",
 
       data_ai_hint: "poke salad",
@@ -146,6 +161,7 @@ export const menu = {
   traditionalRolls: [
     {
       isVegan: true,
+      isCooked: true,
       name: "Avocado Roll (6 Pcs)",
       description:
         "Outside: Seaweed, Sushi Rice, Sesame Seeds | Inside: Avocado",
@@ -154,6 +170,7 @@ export const menu = {
     },
     {
       isVegan: true,
+      isCooked: true,
       name: "Avocado & Cucumber Roll (6 Pcs)",
       description:
         "Outside: Seaweed, Sushi Rice, Sesame Seeds | Inside: Avocado and Cucumber",
@@ -162,6 +179,7 @@ export const menu = {
     },
     {
       isVegan: true,
+      isCooked: true,
       name: "Vegetable Roll (6 Pcs)",
       description:
         "Outside: Seaweed, Sushi Rice, Sesame Seeds | Inside: Avocado, Cucumber, Spring Mix",
@@ -170,6 +188,7 @@ export const menu = {
     },
     {
       isVegan: true,
+      isCooked: true,
       name: "Cucumber Roll",
       description:
         "Outside: Seaweed, Sushi Rice, Sesame Seeds | Inside: Cucumber",
@@ -185,6 +204,7 @@ export const menu = {
       data_ai_hint: "fried california roll",
     },
     {
+      isCooked: false,
       name: "Fried Philadelphia Roll (8 pcs)",
       description:
         "Outside: Sushi Rice, Seaweed, Sesame Seeds | Inside: Salmon, Avocado, Cream Cheese",
@@ -192,6 +212,7 @@ export const menu = {
       data_ai_hint: "fried philadelphia roll",
     },
     {
+      isCooked: false,
       name: "Fried Spicy Tuna Roll (8 Pcs)",
       description:
         "Outside: Sushi Rice, Seaweed, Sesame Seeds | Inside: Spicy Tuna, Cucumber, Avocado",
@@ -199,6 +220,7 @@ export const menu = {
       data_ai_hint: "fried spicy tuna roll",
     },
     {
+      isCooked: true,
       name: "Fried Godzilla Roll (6 Pcs)",
       description:
         "Outside: Seaweed, Sushi Rice, Sesame Seeds | Inside: Shrimp Tempura, Krab, Cream Cheese",
@@ -206,85 +228,14 @@ export const menu = {
       data_ai_hint: "fried godzilla roll",
     },
     {
+      isCooked: true,
+      note: "Recommended",
       name: "Fried Three Kings Roll (6 Pcs)",
       description:
         "Outside: Seaweed, Sushi Rice, Sesame Seeds | Inside: Salmon, Tuna, Yellowtail, Cream Cheese, Avocado",
       src: "https://www.bluebirdhaussushi.com/wp-content/uploads/2024/12/IMG_0050-1920x1440.jpeg",
       price: "14.00",
       data_ai_hint: "fried three kings roll",
-    },
-  ],
-  nigiri: [
-    {
-      name: "Salmon Nigiri",
-      description: "Fresh salmon on sushi rice.",
-      price: "7.00",
-      data_ai_hint: "salmon nigiri",
-    },
-    {
-      name: "Salmon-Avocado Nigiri",
-      description: "Fresh salmon and avocado on sushi rice.",
-      price: "7.50",
-      data_ai_hint: "salmon avocado nigiri",
-    },
-    {
-      name: "Tuna Nigiri",
-      description: "Fresh tuna on sushi rice.",
-      price: "7.00",
-      data_ai_hint: "tuna nigiri",
-    },
-
-    {
-      name: "Tuna-Avocado Nigiri",
-      description: "Fresh tuna and avocado on sushi rice.",
-      price: "7.50",
-      data_ai_hint: "tuna avocado nigiri",
-    },
-    {
-      name: "Seared Salmon Nigiri",
-      description: "Fresh seared salmon on sushi rice.",
-      src: "https://www.bluebirdhaussushi.com/wp-content/uploads/2022/06/Seard-Salmon-Nigiri-scaled.jpg",
-      price: "7.00",
-      data_ai_hint: "seared salmon nigiri",
-    },
-    {
-      name: "Salmon Belly Nigiri",
-      description: "Fresh salmon belly on sushi rice.",
-      src: "https://www.bluebirdhaussushi.com/wp-content/uploads/2023/09/Salmon-Belly-Nigiri-1920x2560.jpg",
-      price: "8.00",
-      data_ai_hint: "salmon belly nigiri",
-    },
-    {
-      name: "Eel Nigiri",
-      description: "Grilled eel on sushi rice with eel sauce.",
-      src: "https://placehold.co/400x400.png",
-      price: "7.50",
-      data_ai_hint: "eel nigiri",
-    },
-    {
-      name: "Eel-Avocado Nigiri",
-      description: "Grilled eel and avocado on sushi rice.",
-      src: "https://placehold.co/400x400.png",
-      price: "7.50",
-      data_ai_hint: "eel avocado nigiri",
-    },
-    {
-      name: "Ebi Shrimp Nigiri",
-      description: "Fresh shrimp on sushi rice.",
-      price: "7.00",
-      data_ai_hint: "ebi nigiri",
-    },
-    {
-      name: "Yellowtail Nigiri",
-      description: "Fresh yellowtail on sushi rice.",
-      price: "7.00",
-      data_ai_hint: "yellowtail nigiri",
-    },
-    {
-      name: "Yellowtail Belly Nigiri",
-      description: "Fresh yellowtail belly on sushi rice.",
-      price: "8.00",
-      data_ai_hint: "yellowtail belly nigiri",
     },
   ],
   delightfulRolls: [
@@ -312,7 +263,6 @@ export const menu = {
       description:
         "Outside: Sushi Rice, Seaweed, Sesame Seeds | Topped: Krab, Spicy Mayo, Spicy Sauce. | Inside: Krab Salad, Cucumber, Avocado   ",
       price: "13.00",
-      src: "https://placehold.co/400x400.png",
       data_ai_hint: "vegan tuna",
     },
     {
@@ -366,6 +316,7 @@ export const menu = {
     },
     {
       isCooked: false,
+      note: ["Recommended", ", ", "Takes extra time"],
       name: "Atlantic Roll (Baked Salmon on California Roll) (8 pcs)",
       description:
         "Outside: Sushi Rice, Seaweed, Sesame Seeds | Topped: Salmon, Spicy Mayo, Eel Sauce | Inside: Krab, Cucumber, Avocado",
@@ -464,6 +415,7 @@ export const menu = {
 
     {
       isVegan: true,
+      isCooked: true,
       name: "Inari V-Avocado (3 pcs)",
       description:
         "Outside: Inari-Soybean Curds | Inside: Sushi Rice and Avocado, Sesame seeds",
@@ -473,6 +425,7 @@ export const menu = {
     },
     {
       isVegan: true,
+      isCooked: true,
       name: "Caterpillar Roll (8 pcs)",
       description:
         "Outside: Sushi Rice, Seaweed, Sesame Seeds | Topped: Avocado | Inside: Cucumber, Avocado, Carrot",
@@ -482,6 +435,7 @@ export const menu = {
     },
     {
       isVegan: true,
+      isCooked: true,
       name: "Popcorn Roll (8 pcs)",
       description:
         "Outside: Sushi Rice, Seaweed, Sesame Seeds | Topped: Cauliflower Tempura | Inside: Cucumber, Avocado, Carrot",
@@ -491,6 +445,7 @@ export const menu = {
     },
     {
       isVegan: true,
+      isCooked: true,
       name: "Tempura Roll (8 pcs)",
       description:
         "Outside: Sushi Rice, Seaweed, Sesame Seeds | Topped: Vegetable Tempura | Inside: Vegetable Tempura",
@@ -500,6 +455,7 @@ export const menu = {
     },
     {
       isVegan: true,
+      isCooked: true,
       name: "Red Dragon Roll (8 pcs)",
       description:
         "Outside: Sushi Rice, Seaweed, Sesame Seeds | Topped: V-Tuna | Inside: Cucumber, Avocado, Fried-tofu",
@@ -509,6 +465,7 @@ export const menu = {
     },
     {
       isVegan: true,
+      isCooked: true,
       name: "Tofu Crunchy Roll",
       description:
         "Outside: Sushi Rice, Seaweed, Sesame Seeds | Topped: Fried Tofu, Fried Onion | Inside: Cucumber, Avocado, Fried Tofu",
@@ -518,6 +475,7 @@ export const menu = {
     },
     {
       isVegan: true,
+      isCooked: true,
       name: "Tofu Delightful Roll ",
       description:
         "Outside: Sushi Rice, Seaweed, Sesame Seeds | Topped: Seared Tofu | Inside: Cucumber, Avocado, Carrot",
@@ -527,6 +485,7 @@ export const menu = {
     },
     {
       isVegan: true,
+      isCooked: true,
       name: "Alaskan Dragon Roll (8 Pcs)",
       description:
         "Outside: Sushi Rice, Seaweed Sesame Seeds | Topped V-Salmon | Inside: Cucumber, Avocado, Fried Tofu",
@@ -536,6 +495,7 @@ export const menu = {
     },
     {
       isVegan: true,
+      isCooked: true,
       name: "Emerald Roll (8 Pcs)",
       description:
         "Outside: Sushi Rice, Seaweed, Sesame Seeds | Topped: Cucumber, Chopped Avocado | Inside: Cucumber, Avocado, Carrot",
@@ -545,6 +505,7 @@ export const menu = {
     },
     {
       isVegan: true,
+      isCooked: true,
       name: "Curry Shrimp Roll",
       description:
         "Inside: Vegetable Tempura, Avocado, Jalapeño | Topped: Curry Sauce, Chili Oil, Eel Sauce, Fried Shrimp, Crunchy Flake, Fried Onion, Green Onion, Sesamee",
@@ -553,6 +514,8 @@ export const menu = {
       data_ai_hint: "vegan curry shrimp roll",
     },
     {
+      isVegan: true,
+      isCooked: true,
       name: "Inari V-Seaweed (3 pcs)",
       description:
         "Outside: Inari-Soybean Curds | Inside: Sushi Rice and Seaweed Salad, Sesame seeds",
@@ -560,6 +523,8 @@ export const menu = {
       data_ai_hint: "vegan seaweed roll",
     },
     {
+      isVegan: true,
+      isCooked: true,
       name: "Inari Nigiri Special (4 pcs)",
       description:
         "Sushi Rice topped with Inari, Avocado, Seaweed, Fried Onion, Jalapeño",
@@ -568,6 +533,7 @@ export const menu = {
     },
     {
       isVegan: true,
+      isCooked: true,
       name: "Spicy Salmon Roll (8 Pcs)",
       description:
         "Outside: Sushi Rice, Seaweed, Sesame Seeds | Inside: Vegan Salmon, Avocado, Cucumber | Sauce: Spicy Mayo",
@@ -576,6 +542,7 @@ export const menu = {
     },
     {
       isVegan: true,
+      isCooked: true,
       name: "Spicy Tuna Roll (8 Pcs)",
       description:
         "Outside: Sushi Rice, Seaweed, Sesame Seeds | Inside: Vegan Tuna, Avocado, Cucumber | Sauce: Spicy Mayo",
@@ -584,6 +551,7 @@ export const menu = {
     },
     {
       isVegan: true,
+      isCooked: true,
       name: "Salmon or Tuna Avocado Roll (8 Pcs)",
       description:
         "Outside: Sushi Rice, Seaweed, Sesame Seeds | Inside: Vegan Salmon or Tuna, Avocado, Cucumber | Sauce: Spicy Mayo",
@@ -591,26 +559,109 @@ export const menu = {
       data_ai_hint: "vegan salmon or tuna avocado roll",
     },
   ],
+  nigiri: [
+    {
+      isCooked: false,
+      name: "Salmon Nigiri",
+      description: "Fresh salmon on sushi rice.",
+      price: "7.00",
+      data_ai_hint: "salmon nigiri",
+    },
+    {
+      isCooked: false,
+      name: "Salmon-Avocado Nigiri",
+      description: "Fresh salmon and avocado on sushi rice.",
+      price: "7.50",
+      data_ai_hint: "salmon avocado nigiri",
+    },
+    {
+      isCooked: false,
+      name: "Tuna Nigiri",
+      description: "Fresh tuna on sushi rice.",
+      price: "7.00",
+      data_ai_hint: "tuna nigiri",
+    },
+
+    {
+      isCooked: false,
+      name: "Tuna-Avocado Nigiri",
+      description: "Fresh tuna and avocado on sushi rice.",
+      price: "7.50",
+      data_ai_hint: "tuna avocado nigiri",
+    },
+    {
+      isCooked: false,
+      name: "Seared Salmon Nigiri",
+      description: "Fresh seared salmon on sushi rice.",
+      src: "https://www.bluebirdhaussushi.com/wp-content/uploads/2022/06/Seard-Salmon-Nigiri-scaled.jpg",
+      price: "7.00",
+      data_ai_hint: "seared salmon nigiri",
+    },
+    {
+      isCooked: false,
+      name: "Salmon Belly Nigiri",
+      description: "Fresh salmon belly on sushi rice.",
+      src: "https://www.bluebirdhaussushi.com/wp-content/uploads/2023/09/Salmon-Belly-Nigiri-1920x2560.jpg",
+      price: "8.00",
+      data_ai_hint: "salmon belly nigiri",
+    },
+    {
+      isCooked: false,
+      name: "Eel Nigiri",
+      description: "Grilled eel on sushi rice with eel sauce.",
+      price: "7.50",
+      data_ai_hint: "eel nigiri",
+    },
+    {
+      isCooked: false,
+      name: "Eel-Avocado Nigiri",
+      description: "Grilled eel and avocado on sushi rice.",
+      price: "7.50",
+      data_ai_hint: "eel avocado nigiri",
+    },
+    {
+      isCooked: false,
+      name: "Ebi Shrimp Nigiri",
+      description: "Fresh shrimp on sushi rice.",
+      price: "7.00",
+      data_ai_hint: "ebi nigiri",
+    },
+    {
+      isCooked: false,
+      name: "Yellowtail Nigiri",
+      description: "Fresh yellowtail on sushi rice.",
+      price: "7.00",
+      data_ai_hint: "yellowtail nigiri",
+    },
+    {
+      isCooked: false,
+      name: "Yellowtail Belly Nigiri",
+      description: "Fresh yellowtail belly on sushi rice.",
+      price: "8.00",
+      data_ai_hint: "yellowtail belly nigiri",
+    },
+  ],
   ramen: [
     {
       isVegan: true,
+      isCooked: true,
       name: " So La’ Men Gyoza",
       description:
         "Creamy Yellow Curry Broth, Ramen, Veggie Gyoza (6), Pickled Cabbage, Spinach, Green Onion, Crispy Noodle.",
       price: "18.00",
-      src: "https://placehold.co/400x400.png",
       data_ai_hint: "so la men gyoza",
     },
     {
       isVegan: true,
+      isCooked: true,
       name: " So La’ Men Tofu",
       description:
         "Creamy Yellow Curry Broth, Ramen, Fried Tofu, Pickled Cabbage, Red Onion, Green Onion, Spinach, Crispy Noodle.",
       price: "17.00",
-      src: "https://placehold.co/400x400.png",
       data_ai_hint: "so la men tofu",
     },
     {
+      isCooked: true,
       name: "So La’ Men Fried Shrimp",
       description:
         "Creamy Yellow Curry Broth, Ramen, Fried Shrimp (Butterfly with Shell), Pickled Cabbage, Red Onion, Green Onion, Spinach, Crispy Noodle.",
@@ -621,6 +672,7 @@ export const menu = {
   ],
   sushiRiceBowl: [
     {
+      isCooked: false,
       name: "Spicy Tuna Rice Bowl",
       description:
         "Sushi Rice, Spicy Tuna, Avocado, Cucumber, Seaweed Salad and Spicy Mayo.",
@@ -628,6 +680,7 @@ export const menu = {
       data_ai_hint: "spicy tuna rice bowl",
     },
     {
+      isCooked: false,
       name: "BlueBird Poke Bowl",
       description:
         "Sushi Rice, Diced Salmon, Tuna, Yellowtail, Avocado, Cucumber, Seaweed Salad, Sesame Seeds, Spicy Poke Sauce",
@@ -635,6 +688,7 @@ export const menu = {
       data_ai_hint: "bluebird poke bowl",
     },
     {
+      isCooked: false,
       name: "Salmon Poke Bowl",
       description:
         "Sushi Rice, Diced Salmon, Cucumber, Avocado,  Seaweed Salad, Sesame seeds,  Poke Sauce",
@@ -642,6 +696,7 @@ export const menu = {
       data_ai_hint: "salmon poke bowl",
     },
     {
+      isCooked: false,
       name: "Tuna Poke Bowl",
       description:
         "Sushi Rice, Diced Tuna, Cucumber, Avocado, Seaweed Salad, Sesame seeds,  Poke Sauce",
@@ -649,6 +704,8 @@ export const menu = {
       data_ai_hint: "tuna poke bowl",
     },
     {
+      isCooked: false,
+      note: "Recommended",
       name: "BlueBird’s Chirashi Bowl",
       description:
         "Sushi Rice, Salmon, Tuna, Yellowtail, Ebi, Cucumber, Avocado, Seaweed Salad, Sesame seeds",
@@ -658,30 +715,76 @@ export const menu = {
     },
     {
       isVegan: true,
+      isCooked: true,
       name: " Spicy Tofu Bowl",
       description:
         "Sushi Rice, Spicy Tofu, Avocado, Cucumber, Seaweed Salad, Sesame Seeds",
       price: "16.00",
-      note: "Recommended",
       data_ai_hint: "spicy tofu bowl",
     },
     {
       isVegan: true,
+      isCooked: true,
       name: " Tuna Spicy Poke Bowl",
       description:
         "Sushi Rice, Vegan Tuna, Cucumber, Avocado, Seaweed Salad, Poke Sauce",
       price: "18.00",
-      note: "Takes extra time",
       data_ai_hint: "tuna spicy poke bowl",
     },
     {
       isVegan: true,
+      isCooked: true,
       name: " Salmon Spicy Poke Bowl",
       description:
         "Sushi Rice, Vegan Salmon, Cucumber, Avocado, Seaweed Salad, Poke Sauce",
       price: "18.00",
-      note: "Takes extra time",
       data_ai_hint: "salmon spicy poke bowl",
+    },
+  ],
+  sashimi: [
+    {
+      isCooked: false,
+      name: "Salmon Sashimi",
+      description: "Fresh salmon served with soy sauce.",
+      src: "https://www.bluebirdhaussushi.com/wp-content/uploads/2023/09/Salmon-Sashimi-1920x2560.jpg",
+      price: "19.00",
+      data_ai_hint: "salmon sashimi",
+    },
+    {
+      isCooked: false,
+      name: "Tuna Sashimi",
+      description: "Fresh tuna served with soy sauce.",
+      src: "https://www.bluebirdhaussushi.com/wp-content/uploads/2023/09/Tuna-Sashimi-1-1920x2560.jpg",
+      price: "19.00",
+      data_ai_hint: "tuna sashimi",
+    },
+    {
+      isCooked: false,
+      name: "Yellowtail Sashimi",
+      description: "Fresh yellowtail served with soy sauce.",
+      price: "19.00",
+      data_ai_hint: "yellowtail sashimi",
+    },
+    {
+      isCooked: false,
+      name: "Salmon Carpaccio",
+      description: "Fresh salmon served with soy sauce.",
+      price: "19.00",
+      data_ai_hint: "salmon carpaccio",
+    },
+    {
+      isCooked: false,
+      name: "Tuna Tataki",
+      description: "Fresh tuna served with soy sauce.",
+      price: "19.00",
+      data_ai_hint: "tuna tataki",
+    },
+    {
+      isCooked: false,
+      name: "Yellowtail Carpaccio",
+      description: "Fresh yellowtail served with soy sauce.",
+      price: "19.00",
+      data_ai_hint: "yellowtail carpaccio",
     },
   ],
 };

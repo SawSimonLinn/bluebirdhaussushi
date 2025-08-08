@@ -49,48 +49,48 @@ const heroImages = [
 
 const reviews = [
   {
-    name: "Alex Johnson",
+    name: "Ferris Behm",
     avatar:
       "https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fwww.gravatar.com%2Favatar%2F2c7d99fe281ecd3bcd65ab915bac6dd5%3Fs%3D250",
     rating: 5,
     review:
-      "Absolutely phenomenal! The vegan sushi options are creative and delicious. The ambiance is perfect for a special night out. Can't wait to come back!",
+      "Highly recommend. I got the Three Kings Roll and the Atlantic Roll and they were AMAZING!!!! The vegetarian/vegan options are amazing as well. The Vegan tenmpura bowl was stacked. Atmosphere was so nice and service was attentive!",
     data_ai_hint: "happy customer",
   },
   {
-    name: "Samantha Lee",
+    name: "Jessica Spencer",
     avatar:
       "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=922&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     rating: 5,
     review:
-      "Blue Bird Haus exceeded all expectations. The Dragon Roll was a work of art, and the service was impeccable. A must-visit for any sushi lover.",
+      "The food and service were amazing! The curry ramen is brilliant! The rolls were very good. Super nice owners. Will definitely be back!",
     data_ai_hint: "pleased diner",
   },
   {
-    name: "Michael Chen",
+    name: "Andrew Rogers",
     avatar:
       "https://harvardtechnologyreview.com/wp-content/uploads/2023/10/image.jpeg",
-    rating: 4,
+    rating: 5,
     review:
-      "A wonderful dining experience. The ramen was authentic and flavorful, and the staff was very accommodating of our dietary needs. Highly recommended.",
+      "Excellent spot for sushi in the neighborhood. Loved the monstrosity they called a Baked Salmon Avocado with eel sauce appetizer. It was insanely great (first photo). I got the caterpillar roll and it was really great.",
     data_ai_hint: "person eating",
   },
   {
-    name: "Jessica Davis",
+    name: "Sarah Trettner",
     avatar:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSv_rkox4AOiwfzaLsYaEtftpv4xfl-lSAGxg&s",
     rating: 5,
     review:
-      "The attention to detail in every dish is astounding. A true gem for anyone who appreciates high-quality, plant-based cuisine. The cocktails are also top-notch!",
+      "We always choose restaurants based on Google ratings and this one had a 4.6 according to Google. It was much better!!!!! We would recommend this restaurant 100% because of the very tasty food and the outstanding service!",
     data_ai_hint: "food blogger",
   },
   {
-    name: "David Wilson",
+    name: "Neesha Patel",
     avatar:
       "https://www.macfound.org/media/fellows/profile_photos/wilson_2001_profile-240.png",
     rating: 5,
     review:
-      "Came here for an anniversary dinner and it was perfect. The atmosphere is romantic and the food is simply divine. We'll definitely be celebrating here again.",
+      "They have a whole vegan menu! They make their vegan fish from different plant sources included roots. Must try! The ambiance is great and the staff is super friendly.",
     data_ai_hint: "happy couple",
   },
 ];
@@ -152,14 +152,15 @@ export default function Home() {
           <div className="absolute inset-0 bg-black/65 z-10" />
 
           {/* 💬 Content */}
-          <div className="z-20 relative px-4">
+          <div className="relative z-10 p-4 animate-in fade-in slide-in-from-top-12 duration-1000">
             <h1 className="font-headline text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight">
               Blue Bird Haus
             </h1>
-            <p className="mt-4 text-lg md:text-xl max-w-2xl mx-auto font-body">
-              Experience the art of sushi in a setting of serene sophistication.
+            <p className="mt-4 text-lg md:text-xl max-w-2xl font-body">
+              Where culinary artistry meets plant-based innovation. Discover our
+              acclaimed vegan sushi and traditional favorites.
             </p>
-            <div className="mt-8 flex justify-center gap-4">
+            <div className="mt-8 flex gap-4 justify-center">
               <Button asChild size="lg" className="font-body">
                 <Link href="/menu">View Menu</Link>
               </Button>
@@ -171,6 +172,41 @@ export default function Home() {
               >
                 <Link href="/reservations">Book a Table</Link>
               </Button>
+            </div>
+            <div className="mt-10 flex items-center justify-center">
+              <div className="flex -space-x-2">
+                <Avatar className="inline-block h-10 w-10 rounded-full ring-2 ring-background">
+                  <AvatarImage
+                    src="https://plus.unsplash.com/premium_photo-1667512827876-c410272b202b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    alt="Customer avatar"
+                    data-ai-hint="happy customer"
+                    className="object-cover"
+                  />
+                  <AvatarFallback>A</AvatarFallback>
+                </Avatar>
+                <Avatar className="inline-block h-10 w-10 rounded-full ring-2 ring-background">
+                  <AvatarImage
+                    src="https://plus.unsplash.com/premium_photo-1664478039038-e0ec48d55ef2?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    alt="Customer avatar"
+                    data-ai-hint="pleased diner"
+                    className="object-cover"
+                  />
+                  <AvatarFallback>B</AvatarFallback>
+                </Avatar>
+                <Avatar className="inline-block h-10 w-10 rounded-full ring-2 ring-background">
+                  <AvatarImage
+                    src="https://plus.unsplash.com/premium_photo-1670002234824-3f2c43d55547?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    alt="Customer avatar"
+                    data-ai-hint="person eating"
+                    className="object-cover"
+                  />
+                  <AvatarFallback>C</AvatarFallback>
+                </Avatar>
+              </div>
+              <div className="ml-4 text-left">
+                <p className="font-semibold">Join over 1,000 happy guests</p>
+                <p className="text-sm">every month</p>
+              </div>
             </div>
           </div>
         </section>
