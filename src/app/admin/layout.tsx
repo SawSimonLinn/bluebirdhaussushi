@@ -12,9 +12,9 @@ export default function AdminLayout({
         <a className="text-primary underline" href="/admin/menu/new">
           New Item
         </a>
-        <a className="text-primary underline" href="/admin/menu/bulk-upload">
-          Bulk Upload
-        </a>
+        {/* <a className="text-primary underline" href="/admin/gallery">
+          Gallery
+        </a> */}
       </nav>
       {children}
     </div>
