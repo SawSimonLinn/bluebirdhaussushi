@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Facebook, Instagram, Twitter, UtensilsCrossed } from "lucide-react";
-import { FaYelp } from "react-icons/fa";
+import { FaYelp, FaLinkedin } from "react-icons/fa";
 import Image from "next/image";
 
 export function Footer() {
@@ -86,6 +86,13 @@ export function Footer() {
                 className="text-muted-foreground hover:text-primary"
               >
                 <FaYelp className="w-5 h-5" />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/sawsimonlinn/"
+                target="_blank"
+                className="text-muted-foreground hover:text-primary"
+              >
+                <FaLinkedin className="w-5 h-5" />
               </a>
             </div>
             <p className="text-sm text-muted-foreground mt-4">

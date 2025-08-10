@@ -126,7 +126,7 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
       <main className="flex-1">
-        <section className="relative h-[60vh] md:h-[80vh] flex items-center justify-center text-center text-white overflow-hidden">
+        <section className="relative h-[75vh] md:h-[80vh] flex items-center justify-center text-center text-white overflow-hidden">
           {/* 🔁 Background Carousel */}
           <div className="embla absolute inset-0 z-0" ref={emblaRef}>
             <div className="embla__container flex h-full">
