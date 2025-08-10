@@ -9,7 +9,15 @@ const nextConfig: NextConfig = {
     ignoreDuringBuilds: true,
   },
   images: {
+    domains: ["nyc.cloud.appwrite.io"],
     remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "nyc.cloud.appwrite.io",
+        port: "",
+        pathname: "/v1/**",
+      },
+
       {
         protocol: "https",
         hostname: "placehold.co",
