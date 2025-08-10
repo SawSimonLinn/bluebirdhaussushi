@@ -53,13 +53,38 @@ type MenuDoc = {
 };
 
 // Fetch one category
-async function getMenuByCategory(category: string) {
-  const res = await db.listDocuments(DATABASE_ID, MENU_COLLECTION_ID, [
-    Query.equal("category", category),
-    Query.orderAsc("order"),
-    Query.orderAsc("name"),
-  ]);
-  return res.documents as MenuDoc[];
+// async function getMenuByCategory(category: string) {
+//   const res = await db.listDocuments(DATABASE_ID, MENU_COLLECTION_ID, [
+//     Query.equal("category", category),
+//     Query.orderAsc("order"),
+//     Query.orderAsc("name"),
+//   ]);
+//   return res.documents as MenuDoc[];
+// }
+
+// Fetch ALL docs for a category (pages of 100)
+async function getAllByCategory(category: string) {
+  const pageSize = 100; // Appwrite max per request
+  let offset = 0;
+  let total = Infinity;
+  const all: MenuDoc[] = [];
+
+  while (all.length < total) {
+    const page = await db.listDocuments(DATABASE_ID, MENU_COLLECTION_ID, [
+      Query.equal("category", category),
+      Query.orderAsc("order"),
+      Query.orderAsc("name"),
+      Query.limit(pageSize),
+      Query.offset(offset),
+    ]);
+
+    all.push(...(page.documents as MenuDoc[]));
+    total = typeof page.total === "number" ? page.total : all.length;
+    offset += pageSize;
+
+    if (!page.documents?.length) break;
+  }
+  return all;
 }
 
 // Tabs/categories (must match your DB `category` values)
@@ -156,7 +181,7 @@ export default function MenuPage() {
       const data: Record<string, MenuDoc[]> = {};
       await Promise.all(
         CATEGORIES.map(async (c) => {
-          data[c.slug] = await getMenuByCategory(c.slug);
+          data[c.slug] = await getAllByCategory(c.slug); // ← use the new function
         })
       );
       setMenuData(data);

@@ -22,25 +22,55 @@ export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url);
     const category = searchParams.get("category") || undefined;
-    const limit = Math.min(Number(searchParams.get("limit") ?? 50), 500); // cap for safety
-    const offset = Math.max(Number(searchParams.get("offset") ?? 0), 0);
+    const all = ["1", "true", "yes"].includes(
+      (searchParams.get("all") || "").toLowerCase()
+    );
 
     const db = getDb();
-    const queries: any[] = [
-      Query.orderAsc("category"), // groups nicely
+
+    // Base ordering/grouping
+    const baseQueries: any[] = [
+      Query.orderAsc("category"),
       Query.orderAsc("order"),
       Query.orderAsc("name"),
+    ];
+    if (category) baseQueries.unshift(Query.equal("category", category));
+
+    if (all) {
+      // Fetch EVERYTHING (pages of 100)
+      const pageSize = 100;
+      let offset = 0;
+      let total = Infinity;
+      const allDocs: any[] = [];
+
+      while (allDocs.length < total) {
+        const page = await db.listDocuments(DATABASE_ID, MENU_COLLECTION_ID, [
+          ...baseQueries,
+          Query.limit(pageSize),
+          Query.offset(offset),
+        ]);
+        allDocs.push(...(page.documents || []));
+        total = page.total ?? allDocs.length;
+        offset += pageSize;
+        if (!page.documents?.length) break;
+      }
+
+      return NextResponse.json(
+        { total: allDocs.length, documents: allDocs },
+        { status: 200 }
+      );
+    }
+
+    // Single page (default)
+    const limit = Math.min(Number(searchParams.get("limit") ?? 50), 100); // Appwrite hard max = 100
+    const offset = Math.max(Number(searchParams.get("offset") ?? 0), 0);
+
+    const res = await db.listDocuments(DATABASE_ID, MENU_COLLECTION_ID, [
+      ...baseQueries,
       Query.limit(limit),
       Query.offset(offset),
-    ];
-    if (category) queries.unshift(Query.equal("category", category));
+    ]);
 
-    const res = await db.listDocuments(
-      DATABASE_ID,
-      MENU_COLLECTION_ID,
-      queries
-    );
-    // Appwrite returns {total, documents, ...}
     return NextResponse.json(res, { status: 200 });
   } catch (err: any) {
     console.error("GET /api/menu error:", err);

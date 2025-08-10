@@ -47,13 +47,13 @@ export default function ContactPage() {
           <CardContent>
             <ul className="text-muted-foreground space-y-1">
               <li>
-                <strong>Monday - Thursday:</strong> 12:00 PM - 9:00 PM
+                <strong>Mon, Wed, Thu, Sun:</strong> 2:30 PM - 9:30 PM
               </li>
               <li>
-                <strong>Friday - Saturday:</strong> 5:00 PM - 10:00 PM
+                <strong>Fri, Sat:</strong> 2:30 PM - 11:00 PM
               </li>
               <li>
-                <strong>Sunday:</strong> 12:00 PM - 9:00 PM
+                <strong>Tue:</strong> Closed
               </li>
             </ul>
           </CardContent>

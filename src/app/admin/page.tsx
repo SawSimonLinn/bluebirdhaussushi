@@ -5,7 +5,7 @@ import { useMemo, useState } from "react";
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json());
 
-// how many items per page
+// items shown per page (client-side)
 const PAGE_SIZE = 25;
 
 const CATEGORY_LABELS: Record<string, string> = {
@@ -19,13 +19,19 @@ const CATEGORY_LABELS: Record<string, string> = {
   sashimi: "Sashimi",
 };
 
-export default function AdminHome() {
-  const [page, setPage] = useState(1);
-  const offset = (page - 1) * PAGE_SIZE;
+const CATEGORY_KEYS = ["", ...Object.keys(CATEGORY_LABELS)]; // "" = All
 
-  // Ask API for a page; if your GET route supports limit/offset it will return { total, documents }
+export default function AdminHome() {
+  const [selectedCat, setSelectedCat] = useState<string>(""); // "" = All
+  const [page, setPage] = useState(1);
+
+  // Build URL: always ask for all results (no 25-item cap); optionally filter by category
+  const qs = new URLSearchParams();
+  if (selectedCat) qs.set("category", selectedCat);
+  qs.set("all", "true");
+
   const { data, mutate, isLoading } = useSWR(
-    `/api/menu?limit=${PAGE_SIZE}&offset=${offset}`,
+    `/api/menu?${qs.toString()}`,
     fetcher
   );
 
@@ -36,34 +42,33 @@ export default function AdminHome() {
     else alert("Delete failed");
   }
 
-  // Normalize results (handles both paged {documents,total} and plain arrays)
-  const docs: any[] = Array.isArray(data)
+  // Normalize results
+  const allDocs: any[] = Array.isArray(data)
     ? data
     : Array.isArray(data?.documents)
     ? data.documents
     : [];
-  const total: number =
-    typeof data?.total === "number"
-      ? data.total
-      : Array.isArray(data)
-      ? data.length
-      : docs.length;
 
+  // Client-side pagination over the full set we fetched
+  const total = allDocs.length;
   const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
+  const offset = (page - 1) * PAGE_SIZE;
+  const pageDocs = allDocs.slice(offset, offset + PAGE_SIZE);
 
-  // Group docs by category for display
+  // Group only the docs for the current page (so each page stays small)
   const grouped = useMemo(() => {
     const map = new Map<string, any[]>();
-    for (const item of docs) {
+    for (const item of pageDocs) {
       const cat = item.category || "uncategorized";
       if (!map.has(cat)) map.set(cat, []);
       map.get(cat)!.push(item);
     }
-    // show in our preferred category order, then any unknowns
-    const orderedKeys = [
-      ...Object.keys(CATEGORY_LABELS),
-      ...Array.from(map.keys()).filter((k) => !(k in CATEGORY_LABELS)),
-    ];
+    const orderedKeys = selectedCat
+      ? [selectedCat] // single group when filtering
+      : [
+          ...Object.keys(CATEGORY_LABELS),
+          ...Array.from(map.keys()).filter((k) => !(k in CATEGORY_LABELS)),
+        ];
     return orderedKeys
       .filter((k) => map.has(k))
       .map((k) => ({
@@ -71,34 +76,59 @@ export default function AdminHome() {
         label: CATEGORY_LABELS[k] ?? k,
         items: map.get(k)!,
       }));
-  }, [docs]);
+  }, [pageDocs, selectedCat]);
+
+  // Reset to page 1 if category changes
+  function onChangeCategory(e: React.ChangeEvent<HTMLSelectElement>) {
+    setSelectedCat(e.target.value);
+    setPage(1);
+  }
 
   if (isLoading) return <p>Loading…</p>;
 
   return (
     <div className="space-y-6">
-      {/* Header + pager */}
-      <div className="flex items-end justify-between">
+      {/* Header + controls */}
+      <div className="flex flex-wrap items-end justify-between gap-3">
         <h1 className="text-2xl font-bold">Menu Items</h1>
-        <div className="flex items-center gap-2">
-          <button
-            className="px-3 py-1 border rounded disabled:opacity-50"
-            disabled={page <= 1}
-            onClick={() => setPage((p) => Math.max(1, p - 1))}
-          >
-            Prev
-          </button>
-          <div className="text-sm">
-            Page <strong>{page}</strong> of <strong>{totalPages}</strong> •{" "}
-            <span className="text-muted-foreground">{total} total</span>
+
+        <div className="flex items-center gap-3">
+          <label className="text-sm">
+            Category:{" "}
+            <select
+              className="border rounded px-2 py-1"
+              value={selectedCat}
+              onChange={onChangeCategory}
+            >
+              <option value="">All</option>
+              {Object.entries(CATEGORY_LABELS).map(([k, label]) => (
+                <option key={k} value={k}>
+                  {label}
+                </option>
+              ))}
+            </select>
+          </label>
+
+          <div className="flex items-center gap-2">
+            <button
+              className="px-3 py-1 border rounded disabled:opacity-50"
+              disabled={page <= 1}
+              onClick={() => setPage((p) => Math.max(1, p - 1))}
+            >
+              Prev
+            </button>
+            <div className="text-sm">
+              Page <strong>{page}</strong> of <strong>{totalPages}</strong> •{" "}
+              <span className="text-muted-foreground">{total} total</span>
+            </div>
+            <button
+              className="px-3 py-1 border rounded disabled:opacity-50"
+              disabled={page >= totalPages}
+              onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+            >
+              Next
+            </button>
           </div>
-          <button
-            className="px-3 py-1 border rounded disabled:opacity-50"
-            disabled={page >= totalPages}
-            onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-          >
-            Next
-          </button>
         </div>
       </div>
 
