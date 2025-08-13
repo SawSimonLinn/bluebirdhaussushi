@@ -95,9 +95,14 @@ export function Footer() {
                 <FaLinkedin className="w-5 h-5" />
               </a>
             </div>
-            <p className="text-sm text-muted-foreground mt-4">
-              1532 E Broadway Long Beach, CA 90802
-            </p>
+            <a
+              href="https://maps.app.goo.gl/kNJ2vvCE64a4JVw1A"
+              className="text-sm font-semibold text-primary hover:underline"
+            >
+              <p className="text-sm text-muted-foreground mt-4">
+                1532 E Broadway Long Beach, CA 90802
+              </p>
+            </a>
             <p className="text-sm text-muted-foreground">(562) 533-2460</p>
           </div>
         </div>

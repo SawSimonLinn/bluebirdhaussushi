@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+sorry, i am updating
+=======
+>>>>>>> HEAD@{1}
 ![blue bird haus sushi banner](./src/app/README.png)
 
 # Blue Bird Haus Sushi Website
@@ -89,3 +95,7 @@ This project demonstrated the power of combining **Next.js + Appwrite** to creat
 ## 📜 License
 
 This project is licensed under the MIT License.
+<<<<<<< HEAD
+=======
+>>>>>>> d0b6a94 (adding readme.md)
+>>>>>>> HEAD@{1}

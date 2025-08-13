@@ -99,7 +99,7 @@ const faqs = [
   {
     question: "Is parking available?",
     answer:
-      "Yes, we understand that parking in Los Angeles can be challenging. We have a dedicated parking lot for our guests, as well as street parking available nearby.",
+      "We do not have a dedicated parking lot for customers. Parking is available on the street on a first-come, first-served basis. We recommend arriving early to secure a spot.",
   },
   {
     question: "Are all your menu items 100% vegan?",
@@ -320,14 +320,14 @@ export default function Home() {
             </div>
             <div className="order-1 md:order-2">
               <h2 className="text-3xl md:text-4xl font-headline mb-4">
-                Events & Catering
+                Party Trays
               </h2>
               <p className="mb-4 text-muted-foreground">
-                Elevate your special occasions with the exquisite flavors of
-                Blue Bird Haus. We offer private dining options and full-service
-                catering for events of all sizes. From corporate gatherings to
-                intimate celebrations, our team will work with you to create a
-                memorable culinary experience.
+                Our party trays are perfect for any gathering, offering a
+                variety of sushi and Japanese-inspired dishes that are as
+                beautiful as they are delicious. Each tray can be customized to
+                suit your preferences and dietary needs, ensuring a personalized
+                culinary experience.
               </p>
               <p className="mb-6 text-muted-foreground">
                 Choose from our curated party trays or customize a menu that

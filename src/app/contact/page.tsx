@@ -79,12 +79,12 @@ export default function ContactPage() {
               </a>
             </div>
             <div>
-              <h3 className="font-semibold">Private Events & Catering</h3>
+              <h3 className="font-semibold">Online Order for Party Trays</h3>
               <a
-                href="mailto:events@bluebirdhaus.com"
+                href="mailto:order@bluebirdhaus.online"
                 className="text-primary hover:underline"
               >
-                events@bluebirdhaus.com
+                order@bluebirdhaus.online
               </a>
             </div>
           </CardContent>
