@@ -7,7 +7,7 @@ const resend = new Resend(process.env.RESEND_API_KEY!);
 const baseUrl =
   process.env.NODE_ENV === "development"
     ? "http://localhost:9002"
-    : "https://bluebirdhaussushi.vercel.app";
+    : "https://bluebirdhaus.online";
 
 export async function POST(req: Request) {
   const body = await req.json();
@@ -44,7 +44,8 @@ export async function POST(req: Request) {
   const address = "1532 E Broadway Long Beach, CA 90802";
   const phone = "+1-562-533-2460";
   const hours =
-    "Mon–Thu & Sun: 12:00 PM – 9:00 PM | Fri–Sat: 12:00 PM – 10:00 PM";
+    "Mon, Wed, Thu, Sun: 2:30 PM - 9:30 PM | Fri, Sat: 2:30 PM - 11:00 PM | Tue: Closed";
+
   const facebook = "https://www.facebook.com/profile.php?id=100083751994296";
   const instagram = "https://www.instagram.com/blue.bird.haus/";
   const yelp = "https://www.yelp.com/biz/blue-bird-haus-long-beach";
@@ -53,7 +54,7 @@ export async function POST(req: Request) {
 
   try {
     const response = await resend.emails.send({
-      from: "Blue Bird Haus <noreply@sawsimonlinn.com>",
+      from: "Blue Bird Haus <noreply@bluebirdhaus.online>",
       to: [contact, "simonlinn2@gmail.com"], // ✅ add your or your client's real email
       subject: "Reservation Confirmation",
       html: `

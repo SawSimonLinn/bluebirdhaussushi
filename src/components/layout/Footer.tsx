@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Facebook, Instagram, Twitter, UtensilsCrossed } from "lucide-react";
+import { Instagram } from "lucide-react";
 import { FaYelp, FaLinkedin } from "react-icons/fa";
 import Image from "next/image";
 
@@ -66,13 +66,13 @@ export function Footer() {
           <div>
             <h3 className="font-headline font-semibold mb-4">Follow Us</h3>
             <div className="flex justify-center md:justify-start space-x-4">
-              <a
+              {/* <a
                 href="https://www.facebook.com/profile.php?id=100083751994296"
                 target="_blank"
                 className="text-muted-foreground hover:text-primary"
               >
                 <Facebook />
-              </a>
+              </a> */}
               <a
                 href="https://www.instagram.com/blue.bird.haus/"
                 target="_blank"
@@ -103,7 +103,9 @@ export function Footer() {
                 1532 E Broadway Long Beach, CA 90802
               </p>
             </a>
-            <p className="text-sm text-muted-foreground">(562) 533-2460</p>
+            <a href="tel:562-533-2460" className="text-primary hover:underline">
+              <p className="text-sm text-muted-foreground">(562) 533-2460</p>
+            </a>
           </div>
         </div>
         <div className="border-t mt-8 pt-6 text-center text-sm text-muted-foreground">

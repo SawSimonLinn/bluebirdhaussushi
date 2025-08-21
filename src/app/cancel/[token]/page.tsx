@@ -11,6 +11,16 @@ const databases = new Databases(client);
 const DATABASE_ID = process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID!;
 const COLLECTION_ID = process.env.NEXT_PUBLIC_APPWRITE_COLLECTION_ID!;
 
+function formatDate(dateString: string) {
+  const date = new Date(dateString);
+  return date.toLocaleDateString("en-US", {
+    weekday: "long", // e.g. Wednesday
+    year: "numeric",
+    month: "long", // August
+    day: "numeric", // 20
+  });
+}
+
 export default function CancelPage({
   params,
 }: {
@@ -78,7 +88,7 @@ export default function CancelPage({
       <h2 className="text-xl font-bold mb-4">Cancel Reservation</h2>
       <p className="mb-4">
         Reservation for <strong>{reservation.name}</strong> on{" "}
-        <strong>{reservation.date}</strong> at{" "}
+        <strong>{formatDate(reservation.date)}</strong> at{" "}
         <strong>{reservation.time}</strong>.
       </p>
 

@@ -1,12 +1,11 @@
 "use client";
 
-import { Client, Databases, ID, Query } from "appwrite"; // add to top of file
+import { Client, Databases, ID, Query } from "appwrite";
 import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
-
 import {
   Form,
   FormControl,
@@ -27,25 +26,14 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { DatePicker } from "@/components/ui/date-picker";
 import { Card, CardContent } from "@/components/ui/card";
-import { CheckCircle } from "lucide-react";
+import { CheckCircle, Loader2 } from "lucide-react";
 
 const formSchema = z.object({
-  name: z.string().min(2, {
-    message: "Name must be at least 2 characters.",
-  }),
-  contact: z.string().email({
-    message: "Please enter a valid email address.",
-  }),
-
-  date: z.date({
-    required_error: "A date is required.",
-  }),
-  time: z.string({
-    required_error: "Please select a time.",
-  }),
-  guests: z.string({
-    required_error: "Please select the number of guests.",
-  }),
+  name: z.string().min(2, { message: "Name must be at least 2 characters." }),
+  contact: z.string().email({ message: "Please enter a valid email address." }),
+  date: z.date({ required_error: "A date is required." }),
+  time: z.string({ required_error: "Please select a time." }),
+  guests: z.string({ required_error: "Please select the number of guests." }),
   notes: z.string().optional(),
 });
 
@@ -54,14 +42,16 @@ export function ReservationForm() {
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: "",
-      contact: "",
-      notes: "",
-    },
+    defaultValues: { name: "", contact: "", notes: "" },
   });
 
-  // Setup Appwrite client
+  const {
+    control,
+    handleSubmit,
+    formState: { isSubmitting },
+  } = form;
+
+  // Appwrite
   const client = new Client()
     .setEndpoint(
       process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT ||
@@ -78,8 +68,11 @@ export function ReservationForm() {
     process.env.NEXT_PUBLIC_APPWRITE_COLLECTION_ID || "YOUR_COLLECTION_ID";
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    // react-hook-form sets isSubmitting; button is disabled, but guard anyway
+    if (isSubmitting) return;
+
     try {
-      // Check if same date/time already exists
+      // check duplicate slot
       const existing = await databases.listDocuments(
         DATABASE_ID,
         COLLECTION_ID,
@@ -88,32 +81,27 @@ export function ReservationForm() {
           Query.equal("time", values.time),
         ]
       );
-
       if (existing.total > 0) {
         alert("This time is already booked. Please choose another.");
         return;
       }
 
-      const cancelToken = ID.unique(); // unique cancel ID
+      const cancelToken = ID.unique();
 
-      // Create new reservation
       await databases.createDocument(DATABASE_ID, COLLECTION_ID, cancelToken, {
         name: values.name,
         contact: values.contact,
         date: values.date.toISOString().split("T")[0],
         time: values.time,
-        guests: parseInt(values.guests), // ✅ Fix here
+        guests: parseInt(values.guests, 10),
         notes: values.notes || "",
         cancelToken,
-        cancelExpires: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(), // 24 hours from now
+        cancelExpires: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
       });
 
-      // Send email & Email notifications
       await fetch("/api/send-email", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...values,
           date: values.date.toISOString().split("T")[0],
@@ -154,47 +142,62 @@ export function ReservationForm() {
     <Card>
       <CardContent className="p-6">
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="space-y-6"
+            aria-busy={isSubmitting}
+          >
             <FormField
-              control={form.control}
+              control={control}
               name="name"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Full Name</FormLabel>
                   <FormControl>
-                    <Input placeholder="John Doe" {...field} />
+                    <Input
+                      placeholder="John Doe"
+                      {...field}
+                      disabled={isSubmitting}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
+
             <FormField
-              control={form.control}
+              control={control}
               name="contact"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input placeholder="johndoe@example.com" {...field} />
+                    <Input
+                      placeholder="johndoe@example.com"
+                      {...field}
+                      disabled={isSubmitting}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <FormField
-                control={form.control}
+                control={control}
                 name="date"
                 render={({ field }) => (
                   <FormItem className="flex flex-col">
                     <FormLabel className="pt-2.5">Date</FormLabel>
-                    <DatePicker field={field} />
+                    <DatePicker field={field} disabled={isSubmitting} />
                     <FormMessage className="pt-1" />
                   </FormItem>
                 )}
               />
+
               <FormField
-                control={form.control}
+                control={control}
                 name="time"
                 render={({ field }) => (
                   <FormItem>
@@ -202,6 +205,7 @@ export function ReservationForm() {
                     <Select
                       onValueChange={field.onChange}
                       defaultValue={field.value}
+                      disabled={isSubmitting}
                     >
                       <FormControl>
                         <SelectTrigger>
@@ -209,9 +213,6 @@ export function ReservationForm() {
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        <SelectItem value="12:00">12:00 PM</SelectItem>
-                        <SelectItem value="13:00">1:00 PM</SelectItem>
-                        <SelectItem value="14:00">2:00 PM</SelectItem>
                         <SelectItem value="15:00">3:00 PM</SelectItem>
                         <SelectItem value="16:00">4:00 PM</SelectItem>
                         <SelectItem value="17:00">5:00 PM</SelectItem>
@@ -226,8 +227,9 @@ export function ReservationForm() {
                 )}
               />
             </div>
+
             <FormField
-              control={form.control}
+              control={control}
               name="guests"
               render={({ field }) => (
                 <FormItem>
@@ -235,6 +237,7 @@ export function ReservationForm() {
                   <Select
                     onValueChange={field.onChange}
                     defaultValue={field.value}
+                    disabled={isSubmitting}
                   >
                     <FormControl>
                       <SelectTrigger>
@@ -253,8 +256,9 @@ export function ReservationForm() {
                 </FormItem>
               )}
             />
+
             <FormField
-              control={form.control}
+              control={control}
               name="notes"
               render={({ field }) => (
                 <FormItem>
@@ -264,6 +268,7 @@ export function ReservationForm() {
                       placeholder="e.g. anniversary, dietary restrictions"
                       className="resize-none"
                       {...field}
+                      disabled={isSubmitting}
                     />
                   </FormControl>
                   <FormDescription>
@@ -273,8 +278,16 @@ export function ReservationForm() {
                 </FormItem>
               )}
             />
-            <Button type="submit" className="w-full">
-              Confirm Reservation
+
+            <Button type="submit" className="w-full" disabled={isSubmitting}>
+              {isSubmitting ? (
+                <span className="inline-flex items-center gap-2">
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                  Submitting…
+                </span>
+              ) : (
+                "Confirm Reservation"
+              )}
             </Button>
           </form>
         </Form>

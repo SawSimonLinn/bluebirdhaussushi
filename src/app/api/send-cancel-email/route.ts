@@ -9,7 +9,7 @@ export async function POST(req: Request) {
 
   try {
     await resend.emails.send({
-      from: "Blue Bird Haus <noreply@sawsimonlinn.com>",
+      from: "Blue Bird Haus <noreply@bluebirdhaus.online>",
       to: [contact, "simonlinn2@gmail.com"], // ✅ Your client email
       subject: "Reservation Cancellation",
       html: `
