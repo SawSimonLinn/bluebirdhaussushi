@@ -11,14 +11,36 @@ const databases = new Databases(client);
 const DATABASE_ID = process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID!;
 const COLLECTION_ID = process.env.NEXT_PUBLIC_APPWRITE_COLLECTION_ID!;
 
-function formatDate(dateString: string) {
-  const date = new Date(dateString);
+// Accepts "YYYY-MM-DD" or full ISO like "2025-08-20T00:00:00.000Z"
+function formatDateLocal(dateInput: string) {
+  if (!dateInput) return "";
+
+  // Always take the first 10 chars "YYYY-MM-DD" to avoid "Invalid Date"
+  const base = dateInput.slice(0, 10); // safe even if ISO
+  const [y, m, d] = base.split("-").map(Number);
+
+  const date = new Date(y, (m || 1) - 1, d || 1); // local midnight
+  if (isNaN(date.getTime())) return ""; // still bad? bail safely
+
   return date.toLocaleDateString("en-US", {
-    weekday: "long", // e.g. Wednesday
+    weekday: "long",
     year: "numeric",
-    month: "long", // August
-    day: "numeric", // 20
+    month: "long",
+    day: "numeric",
   });
+}
+
+// Accepts "HH:mm", "HH:mm:ss", or anything starting with HH:mm
+function formatTimeHHMM(timeInput: string) {
+  if (!timeInput) return "";
+  const base = timeInput.slice(0, 5); // "HH:mm"
+  const [hStr, m = "00"] = base.split(":");
+  let h = Number(hStr);
+  if (isNaN(h)) return "";
+
+  const ampm = h >= 12 ? "PM" : "AM";
+  h = h % 12 || 12;
+  return `${h}:${m} ${ampm}`;
 }
 
 export default function CancelPage({
@@ -88,8 +110,8 @@ export default function CancelPage({
       <h2 className="text-xl font-bold mb-4">Cancel Reservation</h2>
       <p className="mb-4">
         Reservation for <strong>{reservation.name}</strong> on{" "}
-        <strong>{formatDate(reservation.date)}</strong> at{" "}
-        <strong>{reservation.time}</strong>.
+        <strong>{formatDateLocal(reservation.date)}</strong> at{" "}
+        <strong>{formatTimeHHMM(reservation.time)}</strong>.
       </p>
 
       <form onSubmit={handleCancel}>

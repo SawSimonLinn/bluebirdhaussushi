@@ -7,7 +7,7 @@ const resend = new Resend(process.env.RESEND_API_KEY!);
 const baseUrl =
   process.env.NODE_ENV === "development"
     ? "http://localhost:9002"
-    : "https://bluebirdhaus.online";
+    : "https://www.bluebirdhaus.online/";
 
 export async function POST(req: Request) {
   const body = await req.json();
@@ -44,7 +44,9 @@ export async function POST(req: Request) {
   const address = "1532 E Broadway Long Beach, CA 90802";
   const phone = "+1-562-533-2460";
   const hours =
-    "Mon, Wed, Thu, Sun: 2:30 PM - 9:30 PM | Fri, Sat: 2:30 PM - 11:00 PM | Tue: Closed";
+    "Mon, Wed, Thu, Sun: 2:30 PM - 9:30 PM\n" +
+    "Fri, Sat: 2:30 PM - 11:00 PM\n" +
+    "Tue: Closed";
 
   const facebook = "https://www.facebook.com/profile.php?id=100083751994296";
   const instagram = "https://www.instagram.com/blue.bird.haus/";
@@ -66,7 +68,7 @@ export async function POST(req: Request) {
     <h3>Restaurant Info</h3>
     <p>📍 <strong>Location:</strong>${address}</p>
     <p>📞 <strong>Phone:</strong><a href="${cancelLink}">${phone}</a></p>
-    <p>⏰ <strong>Hours:</strong> ${hours}</p>
+    <p style="white-space: pre-line;">⏰ <strong>Hours:</strong> ${hours}</p>
     <p>If you need to cancel, please <a href="${cancelUrl}">click here to cancel your booking</a>.</p>
 
 <hr />
