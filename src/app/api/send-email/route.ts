@@ -5,9 +5,9 @@ import { NextResponse } from "next/server";
 const resend = new Resend(process.env.RESEND_API_KEY!);
 
 const baseUrl =
-  process.env.NODE_ENV === "development"
+  process.env.NODE_ENV === "development" || !process.env.NEXT_PUBLIC_SITE_URL
     ? "http://localhost:9002"
-    : process.env.NEXT_PUBLIC_SITE_URL || "https://bluebirdhaus.online";
+    : process.env.NEXT_PUBLIC_SITE_URL;
 
 export async function POST(req: Request) {
   const body = await req.json();

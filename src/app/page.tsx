@@ -106,11 +106,10 @@ const faqs = [
     answer:
       "Yes, absolutely! We are proud to offer a completely plant-based menu. Everything from our sushi to our ramen and desserts is 100% vegan.",
   },
-
   {
     question: "Do you offer catering for private events?",
     answer:
-      "Yes, we offer comprehensive catering services and options for private events. Please visit our 'Events / Catering' section or contact us directly for more details.",
+      "We no longer offer catering services, but we do provide party trays for special occasions. Please contact us for more details.",
   },
   {
     question: "Do you have options for people with nut allergies?",
