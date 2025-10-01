@@ -163,14 +163,14 @@ export default function Home() {
               <Button asChild size="lg" className="font-body">
                 <Link href="/menu">View Menu</Link>
               </Button>
-              <Button
+              {/* <Button
                 asChild
                 size="lg"
                 variant="secondary"
                 className="font-body"
               >
                 <Link href="/reservations">Book a Table</Link>
-              </Button>
+              </Button> */}
             </div>
             <div className="mt-10 flex items-center justify-center">
               <div className="flex -space-x-2">

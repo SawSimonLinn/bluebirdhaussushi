@@ -30,7 +30,8 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-16 items-center">
+      <div className="mx-auto flex h-16 max-w-9xl items-center justify-between px-4 md:px-10">
+        {/* Logo */}
         <Link href="/" className="m-6 flex items-center space-x-2">
           <Image
             src="/logo.png"
@@ -42,7 +43,8 @@ export function Header() {
           <span className="font-bold font-headline">Blue Bird Haus</span>
         </Link>
 
-        <nav className="hidden md:flex items-center space-x-6 text-sm font-medium">
+        {/* Desktop Nav */}
+        <nav className="mx-6 hidden md:flex items-center space-x-6 text-sm font-medium">
           {navLinks.map((link) => (
             <Link
               key={link.href}
@@ -59,13 +61,10 @@ export function Header() {
           ))}
         </nav>
 
-        <div className="flex flex-1 items-center justify-end space-x-4">
-          <Button asChild className="hidden md:inline-flex">
-            <Link href="/reservations">Book a Table</Link>
-          </Button>
-
+        {/* Mobile Menu */}
+        <div className="md:hidden">
           <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
-            <SheetTrigger asChild className="md:hidden">
+            <SheetTrigger asChild>
               <Button variant="ghost" size="icon">
                 {isMobileMenuOpen ? <X /> : <Menu />}
                 <span className="sr-only">Toggle menu</span>
@@ -104,16 +103,6 @@ export function Header() {
                     </Link>
                   ))}
                 </nav>
-                <div className="mt-auto pt-6">
-                  <Button asChild className="w-full">
-                    <Link
-                      href="/reservations"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                    >
-                      Book a Table
-                    </Link>
-                  </Button>
-                </div>
               </div>
             </SheetContent>
           </Sheet>

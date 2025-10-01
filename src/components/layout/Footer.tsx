@@ -37,14 +37,14 @@ export function Footer() {
                   Menu
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link
                   href="/reservations"
                   className="text-sm text-muted-foreground hover:text-primary"
                 >
                   Reservations
                 </Link>
-              </li>
+              </li> */}
               <li>
                 <Link
                   href="/about"
