@@ -103,8 +103,8 @@ export function Footer() {
                 1532 E Broadway Long Beach, CA 90802
               </p>
             </a>
-            <a href="tel:562-533-2460" className="text-primary hover:underline">
-              <p className="text-sm text-muted-foreground">(562) 533-2460</p>
+            <a href="tel:626-693-0334" className="text-primary hover:underline">
+              <p className="text-sm text-muted-foreground">(626) 693-0334</p>
             </a>
           </div>
         </div>

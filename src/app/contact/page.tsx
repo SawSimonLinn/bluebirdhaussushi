@@ -72,19 +72,19 @@ export default function ContactPage() {
                 Reservations & General Inquiries
               </h3>
               <a
-                href="tel:562-533-2460"
+                href="tel:626-693-0334"
                 className="text-primary hover:underline"
               >
-                (562) 533-2460
+                (626) 693-0334
               </a>
             </div>
             <div>
               <h3 className="font-semibold">Online Order for Party Trays</h3>
               <a
-                href="mailto:order@bluebirdhaus.online"
+                href="mailto:bluebjapan@yahoo.com"
                 className="text-primary hover:underline"
               >
-                order@bluebirdhaus.online
+                bluebjapan@yahoo.com
               </a>
             </div>
           </CardContent>
